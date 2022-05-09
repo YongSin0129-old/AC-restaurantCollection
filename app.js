@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars').engine
-const restaurants = require('./restaurant.json')
+const restaurants = require('./restaurant.json').results
 const port = 3000
 
 const app = express()
@@ -11,7 +11,13 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', { restaurants })
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const selectedIndex = Number(req.params.id) - 1
+  const selectedRestaurant = restaurants[selectedIndex]
+  res.render('show', { selectedRestaurant })
 })
 
 app.listen(port, () => {
