@@ -1,0 +1,19 @@
+{
+  "name": "ac-2-3-ys-restaurant-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-config-standard": "^17.0.0",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0"
+  }
+}
