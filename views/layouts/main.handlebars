@@ -1,0 +1,62 @@
+<html lang='zh-hant'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>collected restaurants</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.css' integrity='sha512-c9N/Xq0n4rQdyCXF4RgrRYAAOSnNJDp8NWILsSUx+33zWyaMbXXvqajgO0UXybRdTGVpxq3FBrcGwabkWsT8OA==' crossorigin='anonymous'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css' integrity='sha512-1hsteeq9xTM5CX6NsXiJu3Y/g+tj+IIwtZMtTisemEv3hx+S9ngaW4nryrNcPM4xGzINcKbwUJtojslX2KG+DQ==' crossorigin='anonymous'/>
+  </head>
+  <body>
+    <header>
+      <!-- navigation -->
+      <nav class='navbar navbar-light bg-light'>
+        <div class='container'>
+          <a class='navbar-brand' href='/'>
+            <img
+              src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png'
+              width='30'
+              height='30'
+              class='d-inline-block align-top'
+              alt='我的餐廳清單'
+            />
+            我的餐廳清單
+          </a>
+        </div>
+      </nav>
+
+      <div class='banner'></div>
+    </header>
+
+    <!-- search bar -->
+    <div class='container search-bar'>
+      <div class='search-bar-outer'>
+        <div class='search-bar-inner'>
+          <form action='/search'>
+            <h4 class='mb-2'>尋找餐廳：</h4>
+            <div class='input-group'>
+              <input
+                type='text'
+                name='keyword'
+                class='form-control'
+                placeholder='輸入餐廳、分類'
+                aria-label='Restaurant Name...'
+                value=''
+                aria-describedby='search-button'
+              />
+              <div class='input-group-append'>
+                <button class='btn btn-major' type='submit' id='search-button'><i class='fas fa-search'></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- restaurant list -->
+    {{{body}}}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
