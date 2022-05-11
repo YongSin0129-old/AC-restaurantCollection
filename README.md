@@ -28,7 +28,7 @@
 1. 打開 terminal, Clone 此專案至本機電腦
 
 ```
-git clone https://github.com/yongsin0129/restaurantCollection.git
+git clone https://github.com/yongsin0129/restaurantCollection.git -b master
 ```
 
 2. 使用終端機 Terminal, 進入存放此專案的資料夾
