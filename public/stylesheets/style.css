@@ -78,6 +78,10 @@ header {
   font-size: 3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+.notFound {
+  text-align: center;
+  margin-top: 6rem;
+}
 
 @media screen and (max-width: 992px) {
   .card img {

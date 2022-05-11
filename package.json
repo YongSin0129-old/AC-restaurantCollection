@@ -12,8 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
-    "express-handlebars": "^6.0.5",
-    "jquery": "^3.6.0"
+    "express-handlebars": "^6.0.5"
   },
   "devDependencies": {
     "eslint": "^8.15.0",
