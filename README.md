@@ -18,17 +18,24 @@
 
 ### package  - 使用套件
 
+By NPM
 - express 4.18.1
 - express-handlebars 6.0.5
-- eslint 8.15.0 ( standard style )
+- dotenv 16.0.1
+- mongoose 5.9.7
 
+By CDN
+- jquery 3.3.1
+- popper 1.14.7
+- bootstrap 4.3.1
+- font-awesome 5.8.1
 
 ### Installing - 專案安裝流程
 
 1. 打開 terminal, Clone 此專案至本機電腦
 
 ```
-git clone https://github.com/yongsin0129/restaurantCollection.git -b master
+git clone https://github.com/yongsin0129/restaurantCollection.git -b A7-add-CRUD
 ```
 
 2. 使用終端機 Terminal, 進入存放此專案的資料夾
