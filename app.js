@@ -1,15 +1,16 @@
 const express = require('express')
+const app = express()
 const exphbs = require('express-handlebars').engine
+const mongoose = require('mongoose')
+const Restaurant = require('./models/restaurant')
 // 載入種子資料
 const restaurants = require('./restaurant.json').results
 // 判斷資料的個數，用於限定動態路由的區間
 const restaurantsCount = restaurants.length
 const port = 3000
 
-const app = express()
-
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
+app.set('view engine', 'hbs')
 app.set('views', './views')
 // 靜態資料統一放在 public
 app.use(express.static('public'))
@@ -29,7 +30,7 @@ app.get(`/restaurants/:id([1-${restaurantsCount}])`, (req, res) => {
 // 收尋的路由
 app.get('/search', (req, res, next) => {
   const keyword = req.query.keyword.toLowerCase()
-  const searchedRestaurant = restaurants.filter((restaurant) => {
+  const searchedRestaurant = restaurants.filter(restaurant => {
     const { name, category } = restaurant
     return (name + category).toLowerCase().includes(keyword)
   })
