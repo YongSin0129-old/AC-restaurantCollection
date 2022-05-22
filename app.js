@@ -2,15 +2,17 @@ const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars').engine
 const Restaurant = require('./models/restaurant')
-// 載入種子資料
-// const restaurants = require('./restaurant.json').results
 const port = 3000
 
+// set view engine and view path
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 app.set('views', './views')
+
 // 靜態資料統一放在 public
 app.use(express.static('public'))
+// load bodyParser
+app.use(express.urlencoded({ extended: true }))
 
 // 首頁
 app.get('/', (req, res) => {
@@ -22,6 +24,24 @@ app.get('/', (req, res) => {
     .catch(error => {
       console.log(error)
     })
+})
+// create new restaurants
+app.get('/createNewRestaurant', (req, res) => {
+  res.render('create')
+})
+app.post('/createNewRestaurant', (req, res) => {
+  Restaurant.create({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  })
+  res.redirect('/')
 })
 
 // 各餐廳的介紹
