@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
       console.log(error)
     })
 })
+
 // create new restaurants
 app.get('/createNewRestaurant', (req, res) => {
   res.render('create')
@@ -46,9 +47,12 @@ app.post('/createNewRestaurant', (req, res) => {
 
 // 各餐廳的介紹
 app.get('/restaurants/:id', (req, res) => {
-  const selectedIndex = Number(req.params.id) - 1
-  const selectedRestaurant = restaurants[selectedIndex]
-  res.render('show', { selectedRestaurant })
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then(selectedRestaurant => {
+      res.render('show', { selectedRestaurant })
+    })
 })
 
 // 收尋的路由
