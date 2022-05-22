@@ -1,0 +1,57 @@
+{{! 
+  "name": "Sababa 沙巴巴中東美食",
+  "name_en": "Sababa Pita Bar",
+  "category": "中東料理",
+  "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
+  "location": "台北市羅斯福路三段 283 巷 17 號",
+  "phone": "02 2363 8009",
+  "google_map": "https://goo.gl/maps/BJdmLuVdDbw",
+  "rating": 4.1,
+  "description": "沙巴巴批塔是台灣第一家純手工批塔專賣店,只選用最新鮮的頂級原料,以及道地的中東家傳配方。" 
+}}
+{{#with selectedRestaurant}}
+  {{#with this}}
+    <div class='container mt-5' id='createNewRestaurant' style='text-align:center'>
+      <form action='/updateRestaurant/{{_id}}' method='post'>
+        <label for='name'>name</label>
+        <input
+          type='text'
+          ID='name'
+          name='name'
+          placeholder='restaurant name is require '
+          value='{{name}}'
+          required='required'
+        />
+        <br />
+        <label for='name_en'>name_en</label>
+        <input type='text' ID='name_en' name='name_en' value='{{name_en}}' />
+        <br />
+        <label for='category'>category</label>
+        <input type='text' ID='category' name='category' value='{{category}}' />
+        <br />
+        <label for='image'>image</label>
+        <input type='text' ID='image' name='image' value='{{image}}' />
+        <br />
+        <label for='location'>location</label>
+        <input type='text' ID='location' name='location' value='{{location}}' />
+        <br />
+        <label for='phone'>phone</label>
+        <input type='text' ID='phone' name='phone' value='{{phone}}' />
+        <br />
+        <label for='google_map'>google_map</label>
+        <input type='text' ID='google_map' name='google_map' value='{{google_map}}' />
+        <br />
+        <label for='rating'>rating</label>
+        <input type='text' ID='rating' name='rating' value='{{rating}}' />
+        <br />
+        <label for='description'>description</label>
+        <textarea type='text' rows="5" ID='description' name='description'>{{description}}</textarea>
+        <hr />
+        <div>
+          <a href='/' class='btn btn-primary'>Back</a>
+          <button class='btn btn-primary' type='submit'>Save</button>
+        </div>
+      </form>
+    </div>
+  {{/with}}
+{{/with}}

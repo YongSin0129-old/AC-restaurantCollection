@@ -29,30 +29,31 @@
     <div class='col-md-10 col-12 mx-auto'>
       <div class='card-columns'>
         {{#each restaurants}}
-        {{#with this}}
-          <a href='/restaurants/{{_id}}' class='text-secondary'>
-            <div class='card mb-3'>
-              <img
-                class='card-img-top'
-                src={{image}}
-                alt={{name}}
-              />
-              <div class='card-body p-3'>
-                <h6 class='card-title mb-1'>{{name}}</h6>
+          {{#with this}}
+            <a href='/restaurants/{{_id}}' class='text-secondary mb-3'>
+              <div class='card mb-0'>
+                <img class='card-img-top' src={{image}} alt={{name}} />
+                <div class='card-body p-3'>
+                  <h6 class='card-title mb-1'>{{name}}</h6>
 
-                <div class='restaurant-category mb-1'>
-                  <i class='fas fa-utensils pr-2'></i>
-                  {{category}}
+                  <div class='restaurant-category mb-1'>
+                    <i class='fas fa-utensils pr-2'></i>
+                    {{category}}
+                  </div>
+
+                  <span class='badge-pill badge-danger font-weight-normal'>
+                    {{rating}}
+                    <i class='fas fa-star fa-xs'></i>
+                  </span>
+
                 </div>
-
-                <span class='badge-pill badge-danger font-weight-normal'>
-                  {{rating}}
-                  <i class='fas fa-star fa-xs'></i>
-                </span>
-
               </div>
+            </a>
+            <div class='card-footer mb-3'>
+              <a href="/updateRestaurant/{{_id}}" class="a-footer">edit</a>
+              <a href="/restaurants/{{_id}}" class="a-footer">detail</a>
+              <a href="/" class="a-footer">delete</a>
             </div>
-          </a>
           {{/with}}
         {{/each}}
       </div>

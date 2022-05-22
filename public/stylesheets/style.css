@@ -82,6 +82,17 @@ header {
   text-align: center;
   margin-top: 6rem;
 }
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+}
+.a-footer {
+  margin: 0.1rem;
+}
+#createNewRestaurant form input,textarea {
+  width: 100%;
+}
 
 @media screen and (max-width: 992px) {
   .card img {

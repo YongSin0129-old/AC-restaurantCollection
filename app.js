@@ -54,20 +54,46 @@ app.get('/restaurants/:id', (req, res) => {
       res.render('show', { selectedRestaurant })
     })
 })
+// update restaurant
+app.get('/updateRestaurant/:id', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then(selectedRestaurant => {
+      res.render('update', { selectedRestaurant })
+    })
+})
+app.post('/updateRestaurant/:id', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .then(data => {
+      data.name = req.body.name
+      data.name_en = req.body.name_en
+      data.category = req.body.category
+      data.image = req.body.image
+      data.location = req.body.location
+      data.phone = req.body.phone
+      data.google_map = req.body.google_map
+      data.rating = req.body.rating
+      data.description = req.body.description
+      data.save()
+      res.redirect('/')
+    })
+})
 
 // 收尋的路由
-app.get('/search', (req, res, next) => {
-  const keyword = req.query.keyword.toLowerCase()
-  const searchedRestaurant = restaurants.filter(restaurant => {
-    const { name, category } = restaurant
-    return (name + category).toLowerCase().includes(keyword)
-  })
-  if (searchedRestaurant.length) {
-    res.render('index', { restaurants: searchedRestaurant, keyword })
-  } else {
-    next()
-  }
-})
+// app.get('/search', (req, res, next) => {
+//   const keyword = req.query.keyword.toLowerCase()
+//   const searchedRestaurant = restaurants.filter(restaurant => {
+//     const { name, category } = restaurant
+//     return (name + category).toLowerCase().includes(keyword)
+//   })
+//   if (searchedRestaurant.length) {
+//     res.render('index', { restaurants: searchedRestaurant, keyword })
+//   } else {
+//     next()
+//   }
+// })
 
 // 查無資料時的路由
 app.get('*', (req, res) => {

@@ -12,33 +12,34 @@
 <div class='container mt-5' id='createNewRestaurant' style='text-align:center'>
   <form action='/createNewRestaurant' method='post'>
     <label for='name'>name</label>
-    <input type='text' ID='name' name='name' placeholder='restaurant name is require ' required="required"/>
-    <br>
+    <input type='text' ID='name' name='name' placeholder='restaurant name is require ' required='required' />
+    <br />
     <label for='name_en'>name_en</label>
     <input type='text' ID='name_en' name='name_en' />
-    <br>
+    <br />
     <label for='category'>category</label>
     <input type='text' ID='category' name='category' />
-    <br>
+    <br />
     <label for='image'>image</label>
-    <input type='text' ID='image' name='image' />
-    <br>
+    <input type='text' ID='image' name='image' value="https://"/>
+    <br />
     <label for='location'>location</label>
     <input type='text' ID='location' name='location' />
-    <br>
+    <br />
     <label for='phone'>phone</label>
     <input type='text' ID='phone' name='phone' />
-    <br>
+    <br />
     <label for='google_map'>google_map</label>
     <input type='text' ID='google_map' name='google_map' />
-    <br>
+    <br />
     <label for='rating'>rating</label>
     <input type='text' ID='rating' name='rating' />
-    <br>
+    <br />
     <label for='description'>description</label>
-    <input type='text' ID='description' name='description' />
+    <textarea type='text' rows="5" ID='description' name='description'></textarea>>
+    <hr>
     <div>
-      <a href="/" class="btn btn-primary">Back to Homepage</a>
+      <a href='/' class='btn btn-primary'>Back to Homepage</a>
       <button class='btn btn-primary' type='submit'>Create</button>
     </div>
   </form>
