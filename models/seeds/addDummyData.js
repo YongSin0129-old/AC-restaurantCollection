@@ -1,6 +1,10 @@
 const Restaurant = require('../restaurant')
 const dummyData = require('../../restaurant.json').results
 
+function createSeedSuccessfully () {
+  console.log('create dummyData Successfully')
+}
+
 dummyData.forEach(data => {
   const restaurant = new Restaurant({
     name: data.name,
@@ -14,4 +18,4 @@ dummyData.forEach(data => {
     description: data.description
   })
   restaurant.save()
-})
+}, createSeedSuccessfully())

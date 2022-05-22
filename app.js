@@ -1,12 +1,9 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars').engine
-const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 // 載入種子資料
-const restaurants = require('./restaurant.json').results
-// 判斷資料的個數，用於限定動態路由的區間
-const restaurantsCount = restaurants.length
+// const restaurants = require('./restaurant.json').results
 const port = 3000
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
@@ -17,11 +14,18 @@ app.use(express.static('public'))
 
 // 首頁
 app.get('/', (req, res) => {
-  res.render('index', { restaurants })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      res.render('index', { restaurants })
+    })
+    .catch(error => {
+      console.log(error)
+    })
 })
 
 // 各餐廳的介紹
-app.get(`/restaurants/:id([1-${restaurantsCount}])`, (req, res) => {
+app.get('/restaurants/:id', (req, res) => {
   const selectedIndex = Number(req.params.id) - 1
   const selectedRestaurant = restaurants[selectedIndex]
   res.render('show', { selectedRestaurant })
