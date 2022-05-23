@@ -46,22 +46,38 @@ app.post('/createNewRestaurant', (req, res) => {
 })
 
 // 各餐廳的介紹
-app.get('/restaurants/:id', (req, res) => {
+app.get('/restaurants/:id', (req, res, next) => {
   const id = req.params.id
-  Restaurant.findById(id)
-    .lean()
-    .then(selectedRestaurant => {
-      res.render('show', { selectedRestaurant })
-    })
+  if (id.length !== 24) {
+    next()
+  } else {
+    Restaurant.findById(id)
+      .lean()
+      .then(selectedRestaurant => {
+        if (selectedRestaurant) {
+          res.render('show', { selectedRestaurant })
+        } else {
+          next()
+        }
+      })
+  }
 })
 // update restaurant
-app.get('/updateRestaurant/:id', (req, res) => {
+app.get('/updateRestaurant/:id', (req, res, next) => {
   const id = req.params.id
-  Restaurant.findById(id)
-    .lean()
-    .then(selectedRestaurant => {
-      res.render('update', { selectedRestaurant })
-    })
+  if (id.length !== 24) {
+    next()
+  } else {
+    Restaurant.findById(id)
+      .lean()
+      .then(selectedRestaurant => {
+        if (selectedRestaurant) {
+          res.render('update', { selectedRestaurant })
+        } else {
+          next()
+        }
+      })
+  }
 })
 app.post('/updateRestaurant/:id', (req, res) => {
   const id = req.params.id
@@ -84,19 +100,24 @@ app.post('/deleteRestaurant/:id', (req, res) => {
   const id = req.params.id
   Restaurant.deleteOne({ _id: id }).then(() => res.redirect('/'))
 })
+
 // 收尋的路由
-// app.get('/search', (req, res, next) => {
-//   const keyword = req.query.keyword.toLowerCase()
-//   const searchedRestaurant = restaurants.filter(restaurant => {
-//     const { name, category } = restaurant
-//     return (name + category).toLowerCase().includes(keyword)
-//   })
-//   if (searchedRestaurant.length) {
-//     res.render('index', { restaurants: searchedRestaurant, keyword })
-//   } else {
-//     next()
-//   }
-// })
+app.get('/search', (req, res, next) => {
+  const keyword = req.query.keyword
+  const regex = new RegExp(`${keyword}`, 'i')
+  Restaurant.find({ $or: [{ name: regex }, { category: regex }] })
+    .lean()
+    .then(restaurants => {
+      if (restaurants.length) {
+        res.render('index', { restaurants })
+      } else {
+        next()
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
 
 // 查無資料時的路由
 app.get('*', (req, res) => {
