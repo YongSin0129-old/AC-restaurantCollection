@@ -85,12 +85,17 @@ header {
 .card-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 0;
+}
+.card-footer .btn {
+  
 }
 .a-footer {
   margin: 0.1rem;
 }
-#createNewRestaurant form input,textarea {
+#createNewRestaurant form input,
+textarea {
   width: 100%;
 }
 

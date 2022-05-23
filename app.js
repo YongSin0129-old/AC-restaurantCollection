@@ -65,22 +65,25 @@ app.get('/updateRestaurant/:id', (req, res) => {
 })
 app.post('/updateRestaurant/:id', (req, res) => {
   const id = req.params.id
-  Restaurant.findById(id)
-    .then(data => {
-      data.name = req.body.name
-      data.name_en = req.body.name_en
-      data.category = req.body.category
-      data.image = req.body.image
-      data.location = req.body.location
-      data.phone = req.body.phone
-      data.google_map = req.body.google_map
-      data.rating = req.body.rating
-      data.description = req.body.description
-      data.save()
-      res.redirect('/')
-    })
+  Restaurant.findById(id).then(data => {
+    data.name = req.body.name
+    data.name_en = req.body.name_en
+    data.category = req.body.category
+    data.image = req.body.image
+    data.location = req.body.location
+    data.phone = req.body.phone
+    data.google_map = req.body.google_map
+    data.rating = req.body.rating
+    data.description = req.body.description
+    data.save()
+    res.redirect('/')
+  })
 })
-
+// delete restaurant
+app.post('/deleteRestaurant/:id', (req, res) => {
+  const id = req.params.id
+  Restaurant.deleteOne({ _id: id }).then(() => res.redirect('/'))
+})
 // 收尋的路由
 // app.get('/search', (req, res, next) => {
 //   const keyword = req.query.keyword.toLowerCase()
