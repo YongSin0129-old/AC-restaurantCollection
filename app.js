@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
 })
 
 // create new restaurants
-app.get('/createNewRestaurant', (req, res) => {
+app.get('/Restaurant/new', (req, res) => {
   res.render('create')
 })
-app.post('/createNewRestaurant', (req, res) => {
+app.post('/Restaurant', (req, res) => {
   Restaurant.create({
     name: req.body.name,
     name_en: req.body.name_en,
@@ -63,7 +63,7 @@ app.get('/restaurants/:id', (req, res, next) => {
   }
 })
 // update restaurant
-app.get('/updateRestaurant/:id', (req, res, next) => {
+app.get('/Restaurant/:id/edit', (req, res, next) => {
   const id = req.params.id
   if (id.length !== 24) {
     next()
@@ -79,7 +79,7 @@ app.get('/updateRestaurant/:id', (req, res, next) => {
       })
   }
 })
-app.post('/updateRestaurant/:id', (req, res) => {
+app.post('/Restaurant/:id/edit', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id).then(data => {
     data.name = req.body.name
@@ -96,7 +96,7 @@ app.post('/updateRestaurant/:id', (req, res) => {
   })
 })
 // delete restaurant
-app.post('/deleteRestaurant/:id', (req, res) => {
+app.post('/Restaurant/:id/delete', (req, res) => {
   const id = req.params.id
   Restaurant.deleteOne({ _id: id }).then(() => res.redirect('/'))
 })

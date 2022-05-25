@@ -1,7 +1,7 @@
 {{#with selectedRestaurant}}
   {{#with this}}
     <div class='container mt-5' id='createNewRestaurant' style='text-align:center'>
-      <form action='/updateRestaurant/{{_id}}' method='post'>
+      <form action='/Restaurant/{{_id}}/edit' method='post'>
         <label for='name'>name</label>
         <input
           type='text'
