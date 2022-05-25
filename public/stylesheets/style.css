@@ -88,8 +88,9 @@ header {
   align-items: center;
   padding: 0;
 }
-.card-footer .btn {
-  
+.card-footer a,
+form {
+  margin: 0 0.4rem;
 }
 .a-footer {
   margin: 0.1rem;

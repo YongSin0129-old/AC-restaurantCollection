@@ -1,8 +1,8 @@
-![image](https://github.com/yongsin0129/restaurantCollection/blob/main/%E9%A4%90%E5%BB%B3%E9%A6%96%E9%A0%81.png)
+![image](./picture/restaurants%20homepage.png)
 
 # 餐廳收集網
 
-一個使用 Node.js + Express 打造的餐廳美食收集網站
+一個使用 Node.js + Express + MongoDB + Mongoose 打造的餐廳美食收集網站
 
 ## Features - 產品功能
 
@@ -10,6 +10,12 @@
 2. 使用者可以再點進去看餐廳的詳細資訊
 3. 使用者可以透過搜尋餐廳名稱來找到特定的餐廳
 4. 使用者可以透過搜尋餐廳類別來找到特定的餐廳
+5. 使用者可以新增一家餐廳
+6. 使用者可以瀏覽一家餐廳的詳細資訊
+7. 使用者可以瀏覽全部所有餐廳
+8. 使用者可以修改一家餐廳的資訊
+9. 使用者可以刪除一家餐廳
+
 
 ### Environment  - 開發環境
 
@@ -51,11 +57,29 @@ npm install
 ```
 
 
-4. 使用終端機 Terminal, 啟動伺服器，執行 app.js 檔案
+4. 在此專案的資料夾新增一個.env，放入 DOT_MONGODB_URI，連結你的 mongoBD
 
 ```
-npm run dev 
+DOT_MONGODB_URI='mongodb+srv://你的帳號:你的密碼@cluster0.ac5wn.mongodb.net/資料庫名稱?retryWrites=true&w=majority'
 ```
+
+5. 使用終端機 Terminal, 建立種子資料，執行 addDummyData 檔案
+
+```
+npm run seed
+```
+
+6. 使用終端機 Terminal, 開啟 server，執行 app.js 檔案
+
+```
+npm run dev
+```
+看到訊息以下訊息表示成功執行此專案
+```
+this server is listening on http://localhost:3000
+mongoose ok !
+```
+
 
 ## Acknowledgments
 

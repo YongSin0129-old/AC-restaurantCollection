@@ -40,10 +40,12 @@
         alt={{selectedRestaurant.name}}
         style='max-width: 600px;'
       />
-      <div style="display:flex; justify-content: center;">
+      <div style='display:flex; justify-content: center;'>
         <a href='/' class='btn btn-primary'>Back to Homepage</a>
         <a href='/updateRestaurant/{{selectedRestaurant._id}}' class='btn btn-primary'>edit</a>
-        <a href='/' class='btn btn-danger'>delete</a>
+        <form action='/deleteRestaurant/{{_id}}' method='POST' style=''>
+          <button type='submit' class='btn btn-danger'>delete</button>
+        </form>
       </div>
     </div>
   </div>
