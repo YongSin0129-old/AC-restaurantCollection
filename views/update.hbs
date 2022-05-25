@@ -1,46 +1,92 @@
 {{#with selectedRestaurant}}
   {{#with this}}
-    <div class='container mt-5' id='createNewRestaurant' style='text-align:center'>
-      <form action='/Restaurant/{{_id}}/edit' method='post'>
-        <label for='name'>name</label>
-        <input
-          type='text'
-          ID='name'
-          name='name'
-          placeholder='restaurant name is require '
-          value='{{name}}'
-          required='required'
-        />
-        <br />
-        <label for='name_en'>name_en</label>
-        <input type='text' ID='name_en' name='name_en' value='{{name_en}}' />
-        <br />
-        <label for='category'>category</label>
-        <input type='text' ID='category' name='category' value='{{category}}' />
-        <br />
-        <label for='image'>image</label>
-        <input type='text' ID='image' name='image' value='{{image}}' />
-        <br />
-        <label for='location'>location</label>
-        <input type='text' ID='location' name='location' value='{{location}}' />
-        <br />
-        <label for='phone'>phone</label>
-        <input type='text' ID='phone' name='phone' value='{{phone}}' />
-        <br />
-        <label for='google_map'>google_map</label>
-        <input type='text' ID='google_map' name='google_map' value='{{google_map}}' />
-        <br />
-        <label for='rating'>rating</label>
-        <input type='text' ID='rating' name='rating' value='{{rating}}' />
-        <br />
-        <label for='description'>description</label>
-        <textarea type='text' rows="5" ID='description' name='description'>{{description}}</textarea>
-        <hr />
-        <div>
-          <a href='/' class='btn btn-primary'>Back</a>
-          <button class='btn btn-primary' type='submit'>Save</button>
+    <form method='post' action='/restaurant/{{_id}}/edit'>
+      <div class='row my-3 justify-content-center'>
+        <label for='name' class='col-sm-2 col-form-label'>Name</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='text' class='form-control' id='name' name='name' value='{{name}}' required />
         </div>
-      </form>
-    </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='name_en' class='col-sm-2 col-form-label'>English Name</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='text' class='form-control' id='name_en' name='name_en' value='{{name_en}}' required />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='category' class='col-sm-2 col-form-label'>Category</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='text' class='form-control' id='category' name='category' value='{{category}}' required />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='rating' class='col-sm-2 col-form-label'>Rating</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input
+            type='number'
+            min='0'
+            max='5'
+            step='0.1'
+            class='form-control'
+            id='rating'
+            name='rating'
+            value='{{rating}}'
+            required
+          />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='location' class='col-sm-2 col-form-label'>Address</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='text' class='form-control' id='location' name='location' value='{{location}}' required />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='phone' class='col-sm-2 col-form-label'>Phone</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='tel' class='form-control' id='phone' name='phone' value='{{phone}}' required />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='description' class='col-sm-2 col-form-label'>Description</label>
+        <div class='col-sm-10 col-lg-5'>
+          <textarea
+            class='form-control'
+            rows='3'
+            id='description'
+            name='description'
+            required
+          >{{description}}</textarea>
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='image' class='col-sm-2 col-form-label'>Image Link</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='url' class='form-control' id='image' name='image' value='{{image}}' required />
+        </div>
+      </div>
+
+      <div class='row my-3 justify-content-center'>
+        <label for='google_map' class='col-sm-2 col-form-label'>Google Map Link</label>
+        <div class='col-sm-10 col-lg-5'>
+          <input type='url' class='form-control' id='google_map' name='google_map' value='{{google_map}}' required />
+        </div>
+      </div>
+
+      <div class='row col-12 col-lg-7 my-3 mx-auto py-0 justify-content-end'>
+        <a href='/' class='ms-2 me-1 col-3 col-lg-2 btn btn-secondary'>
+          back to home
+        </a>
+        <button type='submit' class='ms-2 me-1 col-3 col-lg-2 btn btn-primary'>Save</button>
+      </div>
+
+    </form>
   {{/with}}
 {{/with}}
