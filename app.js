@@ -31,17 +31,7 @@ app.get('/Restaurant/new', (req, res) => {
   res.render('create')
 })
 app.post('/Restaurant', (req, res) => {
-  Restaurant.create({
-    name: req.body.name,
-    name_en: req.body.name_en,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  })
+  Restaurant.create(req.body)
   res.redirect('/')
 })
 
@@ -82,15 +72,7 @@ app.get('/Restaurant/:id/edit', (req, res, next) => {
 app.post('/Restaurant/:id/edit', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id).then(data => {
-    data.name = req.body.name
-    data.name_en = req.body.name_en
-    data.category = req.body.category
-    data.image = req.body.image
-    data.location = req.body.location
-    data.phone = req.body.phone
-    data.google_map = req.body.google_map
-    data.rating = req.body.rating
-    data.description = req.body.description
+    data = Object.assign(data, req.body)
     data.save()
     res.redirect('/')
   })
