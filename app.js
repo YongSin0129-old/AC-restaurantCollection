@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const router = require('./routes')
 const exphbs = require('express-handlebars').engine
 const Restaurant = require('./models/restaurant')
 const port = 3000
@@ -13,18 +14,8 @@ app.set('views', './views')
 app.use(express.static('public'))
 // load bodyParser
 app.use(express.urlencoded({ extended: true }))
-
-// 首頁
-app.get('/', (req, res) => {
-  Restaurant.find()
-    .lean()
-    .then(restaurants => {
-      res.render('index', { restaurants })
-    })
-    .catch(error => {
-      console.log(error)
-    })
-})
+// 設定總路由
+app.use(router)
 
 // create new restaurants
 app.get('/Restaurants/new', (req, res) => {
