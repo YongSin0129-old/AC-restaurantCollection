@@ -1,3 +1,4 @@
+require('./config/mongoose')
 const express = require('express')
 const app = express()
 const router = require('./routes')
@@ -43,3 +44,4 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log('this server is listening on http://localhost:3000')
 })
+

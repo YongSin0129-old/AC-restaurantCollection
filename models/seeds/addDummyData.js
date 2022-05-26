@@ -1,9 +1,7 @@
 const Restaurant = require('../restaurant')
 const dummyData = require('../../restaurant.json').results
-
-function createSeedSuccessfully () {
-  console.log('create dummyData Successfully')
-}
+const mongoose = require('../../config/mongoose')
+const db = mongoose.connection
 
 function createDummyData () {
   dummyData.forEach(data => {
@@ -19,14 +17,20 @@ function createDummyData () {
       description: data.description
     })
     restaurant.save()
-  }, createSeedSuccessfully())
+  })
 }
 
-// 先將 collection 清空再創造新的資料
-Restaurant.deleteMany()
-  .then(() => {
-    createDummyData()
-  })
-  .catch(error => {
+db.on('error', () => {
+  console.log('mongoose error!')
+})
+db.once('open', async () => {
+  try {
+    // 先將 collection 清空再創造新的資料
+    await Restaurant.deleteMany()
+    console.log('delete all data in database')
+    await createDummyData()
+    console.log('create New dummyData Successfully')
+  } catch (error) {
     console.log(error)
-  })
+  }
+})
