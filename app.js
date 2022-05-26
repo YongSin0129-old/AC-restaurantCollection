@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
 })
 
 // create new restaurants
-app.get('/Restaurant/new', (req, res) => {
+app.get('/Restaurants/new', (req, res) => {
   res.render('create')
 })
-app.post('/Restaurant', (req, res) => {
+app.post('/Restaurants', (req, res) => {
   Restaurant.create(req.body)
   res.redirect('/')
 })
@@ -53,7 +53,7 @@ app.get('/restaurants/:id', (req, res, next) => {
   }
 })
 // update restaurant
-app.get('/Restaurant/:id/edit', (req, res, next) => {
+app.get('/Restaurants/:id/edit', (req, res, next) => {
   const id = req.params.id
   if (id.length !== 24) {
     next()
@@ -69,7 +69,7 @@ app.get('/Restaurant/:id/edit', (req, res, next) => {
       })
   }
 })
-app.post('/Restaurant/:id/edit', (req, res) => {
+app.post('/Restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id).then(data => {
     data = Object.assign(data, req.body)
@@ -78,7 +78,7 @@ app.post('/Restaurant/:id/edit', (req, res) => {
   })
 })
 // delete restaurant
-app.post('/Restaurant/:id/delete', (req, res) => {
+app.post('/Restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   Restaurant.deleteOne({ _id: id }).then(() => res.redirect('/'))
 })
