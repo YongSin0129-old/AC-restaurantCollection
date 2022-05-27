@@ -15,6 +15,7 @@
 7. 使用者可以瀏覽全部所有餐廳
 8. 使用者可以修改一家餐廳的資訊
 9. 使用者可以刪除一家餐廳
+10. 使用者可以將餐廳排序
 
 
 ### Environment  - 開發環境
@@ -29,6 +30,7 @@ By NPM
 - express-handlebars 6.0.5
 - dotenv 16.0.1
 - mongoose 5.9.7
+- method-override 3.0.0
 
 By CDN
 - jquery 3.3.1
@@ -41,7 +43,7 @@ By CDN
 1. 打開 terminal, Clone 此專案至本機電腦
 
 ```
-git clone https://github.com/yongsin0129/restaurantCollection.git -b A7-add-CRUD
+git clone https://github.com/yongsin0129/restaurantCollection.git -b A8-refactor
 ```
 
 2. 使用終端機 Terminal, 進入存放此專案的資料夾

@@ -43,7 +43,7 @@
       <div style='display:flex; justify-content: center;'>
         <a href='/' class='btn btn-primary mx-2'>Back to Homepage</a>
         <a href='/Restaurants/{{selectedRestaurant._id}}/edit' class='btn btn-primary'>edit</a>
-        <form action='/Restaurants/{{selectedRestaurant._id}}/delete' method='POST' style=''>
+        <form action='/Restaurants/{{selectedRestaurant._id}}?_method=DELETE' method='POST' style=''>
           <button type='submit' class='btn btn-danger'>delete</button>
         </form>
       </div>

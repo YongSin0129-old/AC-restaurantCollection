@@ -45,7 +45,7 @@ router.get('/:id/edit', (req, res, next) => {
       })
   }
 })
-router.post('/:id/edit', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id).then(data => {
     data = Object.assign(data, req.body)
@@ -54,7 +54,7 @@ router.post('/:id/edit', (req, res) => {
   })
 })
 // delete restaurant
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   Restaurant.deleteOne({ _id: id }).then(() => res.redirect('/'))
 })

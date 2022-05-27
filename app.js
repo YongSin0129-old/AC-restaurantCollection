@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const router = require('./routes')
 const exphbs = require('express-handlebars').engine
+const methodOverride = require('method-override')
 const port = 3000
 
 // set view engine and view path
@@ -14,6 +15,8 @@ app.set('views', './views')
 app.use(express.static('public'))
 // load bodyParser
 app.use(express.urlencoded({ extended: true }))
+// HTTP method_override
+app.use(methodOverride('_method'))
 // 設定總路由
 app.use(router)
 
