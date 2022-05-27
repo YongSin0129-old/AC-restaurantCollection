@@ -3,23 +3,6 @@ const dummyData = require('../../restaurant.json').results
 const mongoose = require('../../config/mongoose')
 const db = mongoose.connection
 
-function createDummyData () {
-  dummyData.forEach(data => {
-    const restaurant = new Restaurant({
-      name: data.name,
-      name_en: data.name_en,
-      category: data.category,
-      image: data.image,
-      location: data.location,
-      phone: data.phone,
-      google_map: data.google_map,
-      rating: data.rating,
-      description: data.description
-    })
-    restaurant.save()
-  })
-}
-
 db.on('error', () => {
   console.log('mongoose error!')
 })
@@ -28,9 +11,23 @@ db.once('open', async () => {
     // 先將 collection 清空再創造新的資料
     await Restaurant.deleteMany()
     console.log('delete all data in database')
-    await createDummyData()
+    await Restaurant.create(dummyData)
     console.log('create New dummyData Successfully')
+    db.close()
+    console.log('database closed')
   } catch (error) {
     console.log(error)
   }
 })
+
+// 原本 建立資料是用 forEach 配合 save() 來使用，但最後要用 db.close()時會遇到非同步的問題
+// 迴圈沒有跑完但 db 卻 close
+// 使用 async await .then callback 都沒有用
+// 留著等以後知道怎麼解再來試
+//
+// function createDummyData () {
+//   dummyData.forEach(data => {
+//     const restaurant = new Restaurant(data)
+//     restaurant.save()
+//   })
+// }
