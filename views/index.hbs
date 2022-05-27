@@ -3,7 +3,7 @@
   <div class="col-md-10 col-12 mx-auto">
     <div class="row">
       {{!-- left search bar --}}
-      <div class='col-6 search-bar-outer'>
+      <div class='col-4 search-bar-outer'>
         <div class='search-bar-inner'>
           <form action='/search'>
             <h4 class='mb-2'>尋找餐廳：</h4>
@@ -19,16 +19,23 @@
       </div>
 
       {{!-- right dropdown list --}}
-      <div class="col-4 offset-2 dropdown" style="text-align: end;">
+      <div class="col-4 offset-4 dropdown" style="text-align: end;">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="Sort" data-toggle="dropdown"
           aria-expanded="false">
           Sort
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/?sort=aToz">A -> Z</a>
-          <a class="dropdown-item" href="/?sort=zToa">Z -> A</a>
+          {{#if keyword}}
+          <a class="dropdown-item" href="/search/?keyword={{keyword}}&sort=name">A -> Z</a>
+          <a class="dropdown-item" href="/search/?keyword={{keyword}}&sort=-name">Z -> A</a>
+          <a class="dropdown-item" href="/search/?keyword={{keyword}}&sort=category">類別</a>
+          <a class="dropdown-item" href="/search/?keyword={{keyword}}&sort=region">地區</a>
+          {{else}}
+          <a class="dropdown-item" href="/?sort=name">A -> Z</a>
+          <a class="dropdown-item" href="/?sort=-name">Z -> A</a>
           <a class="dropdown-item" href="/?sort=category">類別</a>
           <a class="dropdown-item" href="/?sort=region">地區</a>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -41,10 +48,10 @@
 <div class='container mt-5'>
   <div class='row'>
     <div class='col-md-10 col-12 mx-auto'>
-      <div class='card-columns'>
+      <div class='row'>
         {{#each restaurants}}
         {{#with this}}
-        <div class='card'>
+        <div class='card col-4'>
           <a href='/Restaurants/{{_id}}' class='text-secondary'>
             <div class='card mb-0'>
               <img class='card-img-top' src={{image}} alt={{name}} />
