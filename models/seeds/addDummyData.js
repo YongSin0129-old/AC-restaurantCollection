@@ -11,7 +11,7 @@ db.once('open', async () => {
     // 先將 collection 清空再創造新的資料
     await Restaurant.deleteMany()
     console.log('delete all data in database')
-    await Restaurant.create(dummyData)
+    await createDummyData()
     console.log('create New dummyData Successfully')
     db.close()
     console.log('database closed')
@@ -20,6 +20,15 @@ db.once('open', async () => {
   }
 })
 
+async function createDummyData () {
+  for (let i = 0; i < dummyData.length; i++) {
+    const restaurant = new Restaurant(dummyData[i])
+    await restaurant.save()
+  }
+}
+// ! 不能使用 forEach 因為它本身就是一個 callback function
+// ! 會造成 restaurant.save() 還在進行，但 db.close() 也跟著同步進行的問題
+// ! MongoError: Topology is closed, please connect
 // 原本 建立資料是用 forEach 配合 save() 來使用，但最後要用 db.close()時會遇到非同步的問題
 // 迴圈沒有跑完但 db 卻 close
 // 使用 async await .then callback 都沒有用
