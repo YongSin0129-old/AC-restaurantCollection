@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars').engine
 const methodOverride = require('method-override')
 const session = require('express-session')
 require('dotenv').config()
+const usePassport = require('./config/passport')
 const port = 3000
 
 // set view engine and view path
@@ -27,7 +28,8 @@ app.use(
     saveUninitialized: true
   })
 )
-
+// 呼叫 Passport 函式
+usePassport(app)
 // 設定總路由
 app.use(router)
 
