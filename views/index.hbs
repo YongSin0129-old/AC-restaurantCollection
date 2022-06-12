@@ -1,5 +1,5 @@
 <!-- search bar -->
-<div class='container search-bar'>
+<div class='container search-bar mt-3'>
   <div class="col-md-10 col-12 mx-auto">
     <div class="row">
       {{!-- left search bar --}}
@@ -19,7 +19,7 @@
       </div>
 
       {{!-- right dropdown list --}}
-      <div class="col-4 offset-4 dropdown" style="text-align: end;">
+      <div class="col-4 offset-4 dropdown" style="text-align: end; padding-right: 0px;">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="Sort" data-toggle="dropdown"
           aria-expanded="false">
           Sort
@@ -45,10 +45,13 @@
 </div>
 </div>
 
-<div class='container mt-5'>
+<div class='container mt-3'>
   <div class='row'>
     <div class='col-md-10 col-12 mx-auto'>
       <div class='row'>
+        <div class="col-12" style=" text-align:end;">
+          <a href="/Restaurants/new" class="btn btn-primary mb-3">Create</a>
+        </div>
         {{#each restaurants}}
         {{#with this}}
         <div class='card col-4'>

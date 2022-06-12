@@ -30,6 +30,14 @@ app.use(
 )
 // 呼叫 Passport 函式
 usePassport(app)
+
+// 本地變數
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 // 設定總路由
 app.use(router)
 
