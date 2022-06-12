@@ -4,6 +4,8 @@ const app = express()
 const router = require('./routes')
 const exphbs = require('express-handlebars').engine
 const methodOverride = require('method-override')
+const session = require('express-session')
+require('dotenv').config()
 const port = 3000
 
 // set view engine and view path
@@ -17,6 +19,15 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 // HTTP method_override
 app.use(methodOverride('_method'))
+// cookie-session
+app.use(
+  session({
+    secret: process.env.session_secret,
+    resave: false,
+    saveUninitialized: true
+  })
+)
+
 // 設定總路由
 app.use(router)
 
