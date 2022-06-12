@@ -5,7 +5,8 @@ require('dotenv').config()
 mongoose
   .connect(process.env.DOT_MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
   })
   .then(() => {
     console.log('mongoose ok !')
