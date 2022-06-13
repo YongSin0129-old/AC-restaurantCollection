@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 require('dotenv').config()
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 const port = 3000
 
 // set view engine and view path
@@ -31,10 +32,15 @@ app.use(
 // 呼叫 Passport 函式
 usePassport(app)
 
+// 呼叫 flash ，給使用者提示
+app.use(flash())
 // 本地變數
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.error_msg = req.flash('error')
   next()
 })
 
