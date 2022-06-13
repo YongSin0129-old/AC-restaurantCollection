@@ -1,42 +1,56 @@
+const bcrypt = require('bcryptjs')
 const Restaurant = require('../restaurant')
+const User = require('../user')
 const dummyData = require('../../restaurant.json').results
 const mongoose = require('../../config/mongoose')
 const db = mongoose.connection
+
+const seedUsers = [
+  { name: 'user1', email: 'user1@example.com', password: '12345678' },
+  { name: 'user2', email: 'user2@example.com', password: '12345678' }
+]
 
 db.on('error', () => {
   console.log('mongoose error!')
 })
 db.once('open', async () => {
   try {
-    // 先將 collection 清空再創造新的資料
+    // 先將 dataBase 清空再創造新的資料
+    await User.deleteMany()
     await Restaurant.deleteMany()
     console.log('delete all data in database')
     await createDummyData()
     console.log('create New dummyData Successfully')
-    db.close()
     console.log('database closed')
+    process.exit()
   } catch (error) {
     console.log(error)
   }
 })
 
 async function createDummyData () {
-  for (let i = 0; i < dummyData.length; i++) {
-    const restaurant = new Restaurant(dummyData[i])
-    await restaurant.save()
+  for (let i = 0; i < seedUsers.length; i++) {
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(seedUsers[i].password, salt)
+    seedUsers[i].password = hash
+    const user = await User.create(seedUsers[i])
+    switch (user.name) {
+      case 'user1':
+        for (let i = 0; i < 3; i++) {
+          const restaurantData = Object.assign({}, dummyData[i], {
+            userId: user._id
+          })
+          await Restaurant.create(restaurantData)
+        }
+        continue
+      case 'user2':
+        for (let i = 3; i < 6; i++) {
+          const restaurantData = Object.assign({}, dummyData[i], {
+            userId: user._id
+          })
+          await Restaurant.create(restaurantData)
+        }
+        continue
+    }
   }
 }
-// ! 不能使用 forEach 因為它本身就是一個 callback function
-// ! 會造成 restaurant.save() 還在進行，但 db.close() 也跟著同步進行的問題
-// ! MongoError: Topology is closed, please connect
-// 原本 建立資料是用 forEach 配合 save() 來使用，但最後要用 db.close()時會遇到非同步的問題
-// 迴圈沒有跑完但 db 卻 close
-// 使用 async await .then callback 都沒有用
-// 留著等以後知道怎麼解再來試
-//
-// function createDummyData () {
-//   dummyData.forEach(data => {
-//     const restaurant = new Restaurant(data)
-//     restaurant.save()
-//   })
-// }
