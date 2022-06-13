@@ -8,7 +8,7 @@ const session = require('express-session')
 require('dotenv').config()
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
-const port = 3000
+const port = process.env.port || 3000
 
 // set view engine and view path
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
