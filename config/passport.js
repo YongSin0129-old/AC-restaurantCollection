@@ -1,5 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 module.exports = app => {
@@ -11,21 +12,24 @@ module.exports = app => {
     new LocalStrategy(
       { usernameField: 'email', passReqToCallback: true },
       (req, email, password, done) => {
-        User.findOne({ email })
-          .then(user => {
-            if (!user) {
-              return done(null, false, {
-                message: '這個 email 還沒有被註冊'
-              })
-            }
-            if (user.password !== password) {
-              return done(null, false, {
-                message: 'Email 或 Password 不正確.'
-              })
-            }
-            return done(null, user)
-          })
-          .catch(err => done(err, false))
+        User.findOne({ email }).then(user => {
+          if (!user) {
+            return done(null, false, {
+              message: '這個 email 還沒有被註冊'
+            })
+          }
+          bcrypt
+            .compare(password, user.password)
+            .then(isMatch => {
+              if (!isMatch) {
+                return done(null, false, {
+                  message: 'Email 或 Password 不正確.'
+                })
+              }
+              return done(null, user)
+            })
+            .catch(err => done(err, false))
+        })
       }
     )
   )
