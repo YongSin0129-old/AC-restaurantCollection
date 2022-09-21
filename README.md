@@ -1,4 +1,4 @@
-![image](https://github.com/yongsin0129/restaurantCollection/blob/main/%E9%A4%90%E5%BB%B3%E9%A6%96%E9%A0%81.png)
+![image](./restaurants%20homepage.png)
 
 # 餐廳收集網
 
